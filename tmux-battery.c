@@ -13,20 +13,44 @@ struct batteryinfo {
 };
 struct batteryinfo *JOGetBatteryInfo(void);
 
-int main() {
+int main(int argc, char *argv[]) {
 	struct batteryinfo *obj = JOGetBatteryInfo();
 
 	if (!obj->isPresent) {
 		printf("no battery\n");
-		return 1;
 	}
 
 	if (obj->externalConnected) {
-		if (obj->fullyCharged) printf("✔");
-		else printf("▲ %d%%", obj->level);
+		if (obj->fullyCharged) {
+      if(argc > 2) {
+        printf("%s", argv[1]);
+      } else {
+        printf("✔");
+      }
+    } else {
+      if(argc > 3) {
+        printf("%s", argv[2]);
+      } else {
+        printf("▲");
+      }
+      printf(" %d%%", obj->level);
+    }
 	} else {
-		if (obj->level < threshold) printf("▼ %d%%!", obj->level);
-		else printf("▼ %d%%", obj->level);
+		if (obj->level < threshold) {
+      if(argc > 3) {
+        printf("%s", argv[3]);
+      } else {
+        printf("▼");
+      }
+      printf(" %d%%!", obj->level);
+    } else {
+      if(argc > 3) {
+        printf("%s", argv[3]);
+      } else {
+        printf("▼");
+      }
+      printf(" %d%%", obj->level);
+    }
 	}
 
 	printf("\n");
