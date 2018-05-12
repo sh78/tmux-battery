@@ -10,7 +10,7 @@ You can see the checkmark on the left of the date.
 This is written in C using CoreFoundation and IOKit.
 
 ## Usage
-`tmux-battery [[WHEN_FULL]] [[WHEN_DRAINING]] [[WHEN_CHARGING]]`
+`tmux-battery [[WHEN_FULL]] [[WHEN_DRAINING]] [[WHEN_CHARGING]] [[THRESHOLD]]`
 
 By default, it outputs:
 - Full battery, plugged in: a checkmark
@@ -18,7 +18,10 @@ By default, it outputs:
 - Discharging battery, not plugged in: a down arrow and the percentage
 - Below the threshold (10% by default): a down arrow, the percentage, and an exclamation point
 
-Optionally, pass in three of your own strings to use instead of symbols, like:
+Optionally, pass in three of your own strings to use instead of the default symbols above and a
+custom `threshhold` value. You can even pass in emojis!
 
-    tmux-battery 🔋 🔌 ⚡️
-    # => "🔌 72%"`
+    tmux-battery 🔋 🔌 ⚡️ 15
+    # => "⚡️ 14%!"
+    # => "🔌 16%"
+    # => "🔋"

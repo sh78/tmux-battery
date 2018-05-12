@@ -3,8 +3,6 @@
 #include <IOKit/ps/IOPowerSources.h>
 #include <IOKit/ps/IOPSKeys.h>
 
-static const int threshold = 10;
-
 struct batteryinfo {
 	Boolean isPresent;
 	Boolean externalConnected;
@@ -15,6 +13,13 @@ struct batteryinfo *JOGetBatteryInfo(void);
 
 int main(int argc, char *argv[]) {
 	struct batteryinfo *obj = JOGetBatteryInfo();
+
+  int threshold;
+  if (argc > 3) {
+    threshold = strtol(argv[4], NULL, 10);
+  } else {
+    threshold = 10;
+  }
 
 	if (!obj->isPresent) {
 		printf("no battery\n");
